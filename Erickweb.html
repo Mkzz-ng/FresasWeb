@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresas & Crema - Cafetería Artesanal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-claro: #ffebee;
+            --rosa-pastel: #f8bbd0;
+            --rosa-principal: #f48fb1;
+            --beige: #f5f5dc;
+            --beige-oscuro: #e6d6c6;
+            --verde-menta: #c8e6c9;
+            --verde-oscuro: #a5d6a7;
+            --texto-oscuro: #5d4037;
+            --sombra: rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
+            background-color: var(--rosa-claro);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px var(--sombra);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--rosa-principal);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--texto-oscuro);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--rosa-principal);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--rosa-principal);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--verde-oscuro);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Menu Section */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+            color: var(--texto-oscuro);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--texto-oscuro);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px 10px 0;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--rosa-principal);
+            color: white;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--sombra);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 20px;
+        }
+        
+        .menu-item-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item h3 {
+            font-size: 1.3rem;
+        }
+        
+        .price {
+            color: var(--rosa-principal);
+            font-weight: 600;
+        }
+        
+        /* Social Media */
+        .social-section {
+            background-color: var(--beige);
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--rosa-principal);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--rosa-principal);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        /* Location */
+        .location {
+            padding: 60px 0;
+        }
+        
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .address {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: white;
+            padding: 40px 0 20px;
+            box-shadow: 0 -2px 10px var(--sombra);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: var(--rosa-principal);
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--rosa-claro);
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .menu-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/1234567890?text=Hola,%20me%20interesa%20hacer%20un%20pedido" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Fresas & Crema</a>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#redes">Redes Sociales</a></li>
+                    <li><a href="#ubicacion">Ubicación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Dulce Placer en Cada Bocado</h1>
+            <p>Descubre la combinación perfecta de fresas frescas y crema artesanal en un ambiente acogedor</p>
+            <a href="https://wa.me/1234567890?text=Hola,%20me%20interesa%20hacer%20un%20pedido" class="btn" target="_blank">Haz tu pedido por WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestro Menú</h2>
+                <p>Deliciosas creaciones elaboradas con ingredientes frescos y de la más alta calidad</p>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active">Fresas con crema</button>
+                <button class="category-btn">Postres especiales</button>
+                <button class="category-btn">Bebidas frías</button>
+                <button class="category-btn">Bebidas calientes</button>
+            </div>
+
+            <div class="menu-items">
+                <!-- Fresas con crema -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1570145820259-b5b80b53d4b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fresas con crema clásica" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Fresas Clásicas</h3>
+                            <span class="price">$85</span>
+                        </div>
+                        <p>Fresas frescas con crema batida casera y un toque de azúcar glas</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1569489530076-4c292d50b83c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fresas con chocolate" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Fresas Chocolateadas</h3>
+                            <span class="price">$95</span>
+                        </div>
+                        <p>Fresas bañadas en chocolate belga y crema chantilly</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fresas con galleta" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Fresas Crujientes</h3>
+                            <span class="price">$105</span>
+                        </div>
+                        <p>Fresas con crema, trozos de galleta y sirope de fresa</p>
+                    </div>
+                </div>
+
+                <!-- Postres especiales -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1559622214-5f5cde5c7f9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pastel de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Pastel de Fresa</h3>
+                            <span class="price">$120</span>
+                        </div>
+                        <p>Suave bizcocho relleno de fresas naturales y crema pastelera</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cheesecake de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Cheesecake de Fresa</h3>
+                            <span class="price">$130</span>
+                        </div>
+                        <p>Cheesecake cremoso con base de galleta y coulis de fresa natural</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1510432363569-d0f6ba27c11b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mousse de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Mousse de Fresa</h3>
+                            <span class="price">$110</span>
+                        </div>
+                        <p>Mousse ligero de fresa con trozos de fruta natural y merengue</p>
+                    </div>
+                </div>
+
+                <!-- Bebidas frías -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Batido de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Batido de Fresa</h3>
+                            <span class="price">$75</span>
+                        </div>
+                        <p>Batido cremoso de fresa natural con topping de crema batida</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Limonada de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Limonada de Fresa</h3>
+                            <span class="price">$65</span>
+                        </div>
+                        <p>Refrescante limonada con puré de fresa natural y hierbabuena</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Frappé de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Frappé de Fresa</h3>
+                            <span class="price">$80</span>
+                        </div>
+                        <p>Frappé de fresa con base de café y trozos de fruta</p>
+                    </div>
+                </div>
+
+                <!-- Bebidas calientes -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Chocolate caliente" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Chocolate con Fresas</h3>
+                            <span class="price">$90</span>
+                        </div>
+                        <p>Chocolate caliente artesanal acompañado de fresas frescas</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1536216198107-a4a62f123cf8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Capuchino" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Capuchino de Vainilla</h3>
+                            <span class="price">$70</span>
+                        </div>
+                        <p>Capuchino suave con esencia de vainilla y decorado con fresas</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1570970886987-6f6c3e8d2dcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Té de fresa" class="menu-item-img">
+                    <div class="menu-item-content">
+                        <div class="menu-item-title">
+                            <h3>Té de Fresa</h3>
+                            <span class="price">$60</span>
+                        </div>
+                        <p>Infusión de té negro con aroma y trozos de fresa natural</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section" id="redes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Síguenos en Redes Sociales</h2>
+                <p>Descubre nuestras novedades, promociones especiales y detrás de cámaras</p>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="ubicacion">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Ubicación</h2>
+                <p>Ven a visitarnos y disfruta del mejor ambiente para deleitar nuestros postres</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.88865077714!2d-99.169949925686!3d19.427020181803095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff37585f5efb%3A0x4a66ae41c8836fd5!2sCentro%20Hist%C3%B3rico%20de%20la%20Cdad.%20de%20M%C3%A9xico%2C%20Centro%2C%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1685578117652!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <div class="address">
+                <p><i class="fas fa-map-marker-alt"></i> Av. Principal #123, Colonia Centro, Ciudad de México</p>
+                <p><i class="fas fa-clock"></i> Abierto de Lunes a Domingo de 8:00 am a 10:00 pm</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Fresas & Crema</h3>
+                    <p>El lugar perfecto para disfrutar de los mejores postres artesanales con fresas naturales y crema de la más alta calidad.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Horario</h3>
+                    <p>Lunes a Viernes: 8:00 am - 10:00 pm</p>
+                    <p>Sábados y Domingos: 9:00 am - 11:00 pm</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> (55) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> hola@fresascrema.com</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Fresas & Crema - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript para la funcionalidad de filtrado de categorías
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const menuItems = document.querySelectorAll('.menu-item');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover clase active de todos los botones
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Agregar clase active al botón clickeado
+                    button.classList.add('active');
+                    
+                    // Aquí iría la lógica para filtrar los elementos del menú
+                    // Por simplicidad, en este ejemplo solo mostramos un mensaje
+                    console.log('Filtrando por: ' + button.textContent);
+                });
+            });
+            
+            // Efecto de revelado suave al hacer scroll
+            const revealOnScroll = function() {
+                const reveals = document.querySelectorAll('.menu-item, .section-title');
+                
+                for (let i = 0; i < reveals.length; i++) {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = reveals[i].getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveals[i].classList.add('active');
+                    }
+                }
+            };
+            
+            window.addEventListener('scroll', revealOnScroll);
+            window.addEventListener('load', revealOnScroll);
+        });
+    </script>
+</body>
+</html>
